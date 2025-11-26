@@ -1,0 +1,44 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "cmake-configure",
+            "type": "shell",
+            "command": "cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "cmake-build",
+            "type": "shell",
+            "command": "cmake --build build --config Debug",
+            "group": "build",
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "run-executable",
+            "type": "shell",
+            "command": "cmake --build build --config Debug; ${workspaceFolder}/build/${workspaceFolderBasename}",
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "clang-format-file",
+            "type": "shell",
+            "command": "clang-format -i ${file}",
+            "problemMatcher": []
+        },
+        {
+            "label": "clang-format-project",
+            "type": "shell",
+            "command": "clang-format -i $(find src include -name \"*.c\" -o -name \"*.h\")",
+            "problemMatcher": []
+        },
+        {
+            "label": "clang-tidy-file",
+            "type": "shell",
+            "command": "clang-tidy ${file} -- -Iinclude -std=c11",
+            "problemMatcher": []
+        }
+    ]
+}
